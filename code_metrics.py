@@ -34,7 +34,8 @@ def extract_code(input_file):
 
 ###### Line Length Calculator 
 
-def line_length_calculator(input_file, l):
+def line_length_calculator(input_file):
+	l=extract_code(input_file)
 	max=0
 	for i in range(len(l)):
 		if(len(l[i])>max):
@@ -46,10 +47,11 @@ def line_length_calculator(input_file, l):
 
 ###### Line Word Calculator
 
-def line_word_calculator(input_file, l):
+def line_word_calculator(input_file):
+	l=extract_code(input_file)
 	max=0
 	for i in range(len(l)):
-		if(len(l[i])>max):
+		if(len(l[i].split())>max):
 			max=len(l[i])
 	lwc=dict.fromkeys(range(max+1),0)
 	for i in range(len(l)):
@@ -58,7 +60,8 @@ def line_word_calculator(input_file, l):
 
 ##### Access Specifier Calculator 
 
-def access_calculator(input_file, l):
+def access_calculator(input_file):
+	l=extract_code(input_file)
 	acc=dict.fromkeys(["private", "protected", "public"],0)
 	for i in range(len(l)):
 		if("private" in l[i].split()):
@@ -109,25 +112,37 @@ def access_calculator(input_file, l):
 # print(function_arguments)
 
 
+def short_updation(statement):
+	if(statement.find("+")!=-1 or statement.find("-")!=-1 or statement.find("/")!=-1 or
+	statement.find("*")!=-1 or statement.find("!")!=-1 or statement.find("%")!=-1 ):
+		return True
+	return False
+
 def extract_identifier_names(input_file):
-	id_list=[]
+	id_list=set()
 	with open(input_file,'r') as file:
 		for line in file:
 			split_line = re.split("=",line.strip())
+			# print(split_line)
 			try:
 				_ = split_line[1]
 				ids = split_line[0]
-				for id in ids.strip().split(','):
-					id_list.append(id.strip())
+				if(not(ids.startswith("if") or ids.startswith("print")) and (ids.find(".")==-1)):
+					if(not(short_updation(ids))):
+						ind=ids.find('[')
+						if(ind!=-1):
+							id_list.add(ids[0:ind])
+						else:
+							for id in ids.strip().split(','):
+								id_list.add(id.strip())	
 			except IndexError: 
 				continue
 	return id_list
 
-print(halstead_metrics('knn.py'))
-print(raw_metrics('knn.py'))
-print(number_of_functions('knn.py'))
-print(maintainability_index('knn.py'))
-l=extract_code('knn.py')
-print(line_length_calculator('knn.py',l))
-print(line_word_calculator('knn.py',l))
-print(access_calculator('knn.py',l))
+# print(halstead_metrics('knn.py'))
+# print(raw_metrics('knn.py'))
+# print(number_of_functions('knn.py'))
+# print(maintainability_index('knn.py'))
+# print(line_length_calculator('knn.py'))
+# print(line_word_calculator('knn.py'))
+# print(access_calculator('knn.py'))
