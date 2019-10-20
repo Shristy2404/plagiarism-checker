@@ -102,3 +102,7 @@ venv.bak/
 
 # mypy
 .mypy_cache/
+
+# Dataset
+final_dataset.csv
+semi_final.csv
