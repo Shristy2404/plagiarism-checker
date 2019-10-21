@@ -48,6 +48,6 @@ class KNNClassifier:
     def score(self,X_test,y_test):
         y_preds = []
         for index,row in X_test.iterrows():
-            pred,ranked = predict(np.array(row))
+            pred,ranked = self.predict(np.array(row))
             y_preds.append(pred)
         return accuracy_score(y_test,y_preds)
