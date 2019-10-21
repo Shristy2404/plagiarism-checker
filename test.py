@@ -6,6 +6,7 @@ import pandas as pd
 # READ DATASET
 df = pd.read_csv('final_dataset.csv')
 df = df.drop(['file_name','llc_0','lwc_0','vocabulary','length','effort','volume','loc'],axis=1)
+df = df.loc[:, df.isin([' ','NULL',0]).mean() < .6] # Drop if missing values > 60%
 y = df.pop('author')
 X = df.copy()
 
