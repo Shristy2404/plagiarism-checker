@@ -1,6 +1,7 @@
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import classification_report,confusion_matrix
 from knn import *
+from datetime import datetime
 import pandas as pd
 
 # READ DATASET
@@ -14,12 +15,16 @@ X = df.copy()
 X_train, X_test, y_train, y_test = train_test_split(X,y,test_size=0.25,random_state=42)
 
 # MODEL
+start=datetime.now()
+
 clf = KNNClassifier(n_neighbors=3)
 clf.train(X_train,y_train)
 y_preds = clf.batch_predictions(X)
 print('\nClassification Report')
 print(classification_report(y,y_preds))
 print('Accuracy: ',clf.score(X,y))
+
+print('Time taken:',datetime.now()-start)
 
 # CONFUSION MATRIX VISUALIZATION
 y_actu = pd.Series(np.array(y), name='Actual')
