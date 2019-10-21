@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 from sklearn.metrics import accuracy_score
+
 class KNNClassifier:
     def __init__(self,n_neighbors=3):
         self.n_neighbors = n_neighbors
@@ -44,10 +45,13 @@ class KNNClassifier:
 
         return self.process_probable_predictions(probable_predictions),sorted_list
 
-
-    def score(self,X_test,y_test):
+    def batch_predictions(self,X_test):
         y_preds = []
         for index,row in X_test.iterrows():
             pred,ranked = self.predict(np.array(row))
             y_preds.append(pred)
+        return y_preds
+
+    def score(self,X_test,y_test):
+        y_preds = self.batch_predictions(X_test)
         return accuracy_score(y_test,y_preds)
