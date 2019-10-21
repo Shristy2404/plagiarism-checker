@@ -7,5 +7,6 @@
 4. Run test.py to get the result
 
 ## Results
-**CONFUSION MATRIX**
-![Confusion Matrix](./result_confusion_matrix.png?raw=true "Confusion Matrix")
+![Confusion Matrix](./results/confusion_matrix.png?raw=true "Confusion Matrix")
+![Test Set Results](./results/test_report.png?raw=true "Test Set Results")
+![Full Dataset Results](./results/full_dataset_report.png?raw=true "Full Dataset Results")
