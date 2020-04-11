@@ -106,3 +106,7 @@ venv.bak/
 # Dataset
 final_dataset.csv
 semi_final.csv
+.vscode/
+
+# Mac OS
+.DS_Store
