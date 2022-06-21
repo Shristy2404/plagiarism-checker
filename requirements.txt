@@ -6,7 +6,7 @@ future==0.18.1
 joblib==0.14.0
 mando==0.6.4
 mccabe==0.6.1
-numpy==1.17.3
+numpy==1.22.0
 pandas==0.25.2
 pycodestyle==2.5.0
 pyflakes==2.1.1
